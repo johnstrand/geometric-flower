@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#17243a" />
+    <title>Arcadia | Recursive figure</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="control-panel" aria-label="Arcadia recursive figure controls">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> A tiny geometry garden</div>
+        <p class="intro">
+          Tune the ingredients and watch a simple circle unfurl into a curious recursive bloom.
+        </p>
+
+        <div class="controls" aria-label="Figure controls">
+          <div class="control-row">
+            <div class="label-line">
+              <label for="generations">Generations</label>
+              <output id="generations-value" for="generations" aria-live="polite">4</output>
+            </div>
+            <input id="generations" type="range" min="1" max="8" value="4" step="1" />
+            <div class="range-hints"><span>seed</span><span>lush</span></div>
+          </div>
+
+          <div class="control-row">
+            <div class="label-line">
+              <label for="arcs">Initial arcs</label>
+              <output id="arcs-value" for="arcs" aria-live="polite">7</output>
+            </div>
+            <input id="arcs" type="range" min="3" max="14" value="7" step="1" />
+            <div class="range-hints"><span>3 min</span><span>14 max</span></div>
+          </div>
+
+          <div class="palette-control">
+            <div class="label-line">
+              <label for="palette">Color ritual</label>
+            </div>
+            <select id="palette">
+              <option value="moonflower">Moonflower Ritual</option>
+              <option value="sunset-caravan">Sunset Caravan</option>
+              <option value="moss-mercury">Moss &amp; Mercury</option>
+              <option value="electric-meadow">Electric Meadow</option>
+              <option value="desert-daydream">Desert Daydream</option>
+            </select>
+          </div>
+
+          <div class="control-row">
+            <div class="label-line">
+              <label for="height">Circle size</label>
+              <output id="height-value" for="height" aria-live="polite">320 <small>px</small></output>
+            </div>
+            <input id="height" type="range" min="180" max="440" value="320" step="10" />
+            <div class="range-hints"><span>small</span><span>large</span></div>
+          </div>
+
+          <div class="control-row">
+            <div class="label-line">
+              <label for="arc-height">Arc height</label>
+              <output id="arc-height-value" for="arc-height" aria-live="polite">75 <small>px</small></output>
+            </div>
+            <input id="arc-height" type="range" min="20" max="180" value="75" step="5" />
+            <div class="range-hints"><span>delicate</span><span>bold</span></div>
+          </div>
+
+          <div class="control-row">
+            <div class="label-line">
+              <label for="scale">Arc scale</label>
+              <output id="scale-value" for="scale" aria-live="polite">1.0</output>
+            </div>
+            <input id="scale" type="range" min="0.1" max="2" value="1" step="0.1" />
+            <div class="range-hints"><span>taper</span><span>expand</span></div>
+          </div>
+
+          <div class="control-row">
+            <div class="label-line">
+              <label for="line-thickness">Line thickness</label>
+              <output id="line-thickness-value" for="line-thickness" aria-live="polite">3.0 <small>px</small></output>
+            </div>
+            <input id="line-thickness" type="range" min="1" max="8" value="3" step="0.5" />
+            <div class="range-hints"><span>fine</span><span>bold</span></div>
+          </div>
+
+          <label class="fill-toggle" for="fill-arcs">
+            <input id="fill-arcs" type="checkbox" />
+            <span>Fill the arcs</span>
+          </label>
+
+          <button class="random-button" id="randomize" type="button">
+            <span class="random-icon" aria-hidden="true">✦</span>
+            <span>Randomize figure</span>
+            <span class="button-arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+
+        <div class="legend" aria-label="Figure key">
+          <div class="legend-item"><span class="legend-swatch seed-swatch"></span><span>seed circle</span></div>
+          <div class="legend-item"><span class="legend-swatch arc-swatch"></span><span>growing arcs</span></div>
+        </div>
+
+        <p class="tip"><span class="tip-mark">✦</span> Every new arc starts exactly where the last layer peaks.</p>
+      </section>
+
+      <section class="art-panel" aria-labelledby="figure-title">
+        <div class="art-header">
+          <div>
+            <p class="section-kicker">Live study <span class="dash"></span> 01</p>
+            <h2 id="figure-title">The unfolding</h2>
+          </div>
+          <div class="generation-badge"><span id="badge-generations">04</span><small>layers</small></div>
+        </div>
+
+        <div class="canvas-wrap">
+          <div class="orbit-label orbit-label-top">outward / outward / outward</div>
+          <svg id="figure" role="img" aria-labelledby="figure-title figure-description" viewBox="0 0 720 720" preserveAspectRatio="xMidYMid meet">
+            <desc id="figure-description">A recursive flower made from a central circle and connected outward arcs.</desc>
+            <defs>
+              <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="8" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <radialGradient id="seed-fill" cx="35%" cy="30%">
+                <stop offset="0%" stop-color="#f5dfb8" />
+                <stop offset="100%" stop-color="#d49665" />
+              </radialGradient>
+            </defs>
+            <g id="figure-art"></g>
+          </svg>
+          <div class="orbit-label orbit-label-bottom">a small system of becoming</div>
+        </div>
+
+        <div class="art-footer">
+          <span class="footer-note">A new shape, every time.</span>
+          <span class="seed-readout">seed <code id="seed-value">--------</code></span>
+          <span class="coordinates" id="coordinates">07 × 04 · C320 · A75 · 1.0x · T3.0</span>
+        </div>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
